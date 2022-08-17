@@ -7,6 +7,8 @@ export default function App() {
   const [start, setStart] = useState(false);
   const [quiz, setQuiz] = useState([]);
   const [complete, setComplete] = useState(false);
+  const URL =
+    "https://opentdb.com/api.php?amount=4&category=14&difficulty=easy&type=multiple&encode=url3986";
 
   function onStart() {
     setStart(!start);
@@ -14,12 +16,10 @@ export default function App() {
 
   useEffect(() => {
     async function getQuiz() {
-      const res = await fetch(
-        "https://opentdb.com/api.php?amount=4&category=31&difficulty=easy&type=multiple&encode=url3986"
-      );
+      const res = await fetch(URL);
       const dataArray = await res.json();
       const dataObj = dataArray.results.map((item) => {
-        return { ...item, selectedAns: "", id: nanoid()};
+        return { ...item, selectedAns: "", id: nanoid() };
       });
       setQuiz(dataObj);
     }
@@ -37,15 +37,11 @@ export default function App() {
   }
 
   const onSubmit = () => {
-    const allSelected = quiz.every(item => item.selectedAns);
+    const allSelected = quiz.every((item) => item.selectedAns);
     setComplete(allSelected ? true : false);
-  }
+  };
 
-  function onNewGame() {
-
-  }
-
-  
+  function onNewGame() {}
 
   const quizEl = quiz.map((item) => {
     return (
@@ -60,7 +56,7 @@ export default function App() {
       />
     );
   });
-  console.log(quiz, complete)
+  console.log(quiz, complete);
 
   return (
     <div className="w-screen h-screen">
@@ -74,12 +70,20 @@ export default function App() {
       {start && (
         <div className="flex flex-col divide-y-2 gap-6 m-2 px-2 items-center">
           {quizEl}
-          {!complete && <button onClick={onSubmit} className="p-4 text-xl font-semibold bg-indigo-600 hover:bg-indigo-700 rounded-lg">
-            Submit!
-          </button>}
-          {complete && <button onClick={onNewGame} className="p-4 text-xl font-semibold bg-indigo-600 hover:bg-indigo-700 rounded-lg">
-            New Game
-          </button>}
+          {!complete && (
+            <button
+              onClick={onSubmit}
+              className="p-4 text-xl font-semibold bg-indigo-600 hover:bg-indigo-700 rounded-lg">
+              Submit!
+            </button>
+          )}
+          {complete && (
+            <button
+              onClick={onNewGame}
+              className="p-4 text-xl font-semibold bg-indigo-600 hover:bg-indigo-700 rounded-lg">
+              New Game
+            </button>
+          )}
         </div>
       )}
       <img
