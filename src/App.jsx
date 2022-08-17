@@ -24,7 +24,6 @@ export default function App() {
       setQuiz(dataObj);
     }
     getQuiz();
-    console.log(quiz);
   }, [start]);
 
   function onSelectAnswer(id, e) {
@@ -41,7 +40,6 @@ export default function App() {
     const allSelected = quiz.every(item => item.selectedAns);
     setComplete(allSelected ? true : false);
   }
-
   function onNewGame() {
 
   }
@@ -58,7 +56,6 @@ export default function App() {
       />
     );
   });
-
   return (
     <div className="w-screen h-screen">
       <img

@@ -1,21 +1,25 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Question(props) {
   const [isShuffled, setIsShuffled] = useState(false);
   const options = [props.correctAns, ...props.incorrectAns];
   const cleanData = options.map((item) => decodeURIComponent(item));
-  function shuffle(a) {
-    var j, x, i;
-    for (i = a.length - 1; i > 0; i--) {
-      j = Math.floor(Math.random() * (i + 1));
-      x = a[i];
-      a[i] = a[j];
-      a[j] = x;
+  const [questions, setQuestions] = useState(cleanData);
+
+  useEffect(() => {
+    function shuffle(a) {
+      var j, x, i;
+      for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+      }
+      return a;
     }
-    setIsShuffled(!isShuffled);
-    return a;
-  }
-  const shuffledOptions = isShuffled ? cleanData : shuffle(cleanData);
+    setQuestions(shuffle(cleanData));
+    setIsShuffled(true);
+  }, [isShuffled]);
 
   return (
     <div className="flex flex-col w-full h-full items-center justify-center gap-6 px-2 py-6">
@@ -29,28 +33,28 @@ export default function Question(props) {
               props.handleClick(e);
             }}
             className="text-xl rounded-md w-fit h-fit p-1  bg-indigo-100 text-indigo-900 hover:bg-indigo-200">
-            {shuffledOptions[0]}
+            {questions[0]}
           </button>
           <button
             onClick={(e) => {
               props.handleClick(e);
             }}
             className="text-xl rounded-md w-fit h-fit p-1 bg-indigo-100 text-indigo-900 hover:bg-indigo-200">
-            {shuffledOptions[1]}
+            {questions[1]}
           </button>
           <button
             onClick={(e) => {
               props.handleClick(e);
             }}
             className="text-xl rounded-md w-fit h-fit p-1 bg-indigo-100 text-indigo-900 hover:bg-indigo-200">
-            {shuffledOptions[2]}
+            {questions[2]}
           </button>
           <button
             onClick={(e) => {
               props.handleClick(e);
             }}
             className="text-xl rounded-md w-fit h-fit p-1 bg-indigo-100 text-indigo-900 hover:bg-indigo-200">
-            {shuffledOptions[3]}
+            {questions[3]}
           </button>
         </div>
       </div>
