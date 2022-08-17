@@ -6,8 +6,9 @@ export default function Question(props) {
   const cleanData = options.map((item) => decodeURIComponent(item));
   const [questions, setQuestions] = useState(cleanData);
   const purple = "#e7a6f7";
-  const green = "#a5ed93";
-  const red = "#f0643a";
+  const green = "#2cf562";
+  const lightGreen = '#d7fce1';
+  const red = "#f75c75";
 
   useEffect(() => {
     function shuffle(a) {
@@ -27,6 +28,10 @@ export default function Question(props) {
   function computeStyle(textContent, correctAns, selectedAns, isComplete) {
     correctAns = decodeURIComponent(correctAns);
     let styles;
+    if (textContent === correctAns && isComplete) {
+      styles = { backgroundColor: lightGreen };
+    }
+
     if (selectedAns === textContent) {
       if (isComplete) {
         styles =
@@ -37,6 +42,7 @@ export default function Question(props) {
         styles = { backgroundColor: purple };
       }
     }
+    
     return styles;
   }
 
