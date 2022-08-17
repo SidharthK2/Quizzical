@@ -40,9 +40,12 @@ export default function App() {
     const allSelected = quiz.every(item => item.selectedAns);
     setComplete(allSelected ? true : false);
   }
+
   function onNewGame() {
 
   }
+
+  
 
   const quizEl = quiz.map((item) => {
     return (
@@ -51,11 +54,14 @@ export default function App() {
         title={item.question}
         correctAns={item.correct_answer}
         incorrectAns={item.incorrect_answers}
+        selectedAns={item.selectedAns}
         isComplete={complete}
         handleClick={(e) => onSelectAnswer(item.id, e)}
       />
     );
   });
+  console.log(quiz, complete)
+
   return (
     <div className="w-screen h-screen">
       <img
