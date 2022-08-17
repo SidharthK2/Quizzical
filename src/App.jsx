@@ -41,7 +41,10 @@ export default function App() {
     setComplete(allSelected ? true : false);
   };
 
-  function onNewGame() {}
+  function onNewGame() {
+    setStart(false);
+    setComplete(false);
+  }
 
   const quizEl = quiz.map((item) => {
     return (
