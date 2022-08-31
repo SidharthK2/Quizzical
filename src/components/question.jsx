@@ -7,12 +7,12 @@ export default function Question(props) {
   const [questions, setQuestions] = useState(cleanData);
   const purple = "#e7a6f7";
   const green = "#2cf562";
-  const lightGreen = '#d7fce1';
+  const lightGreen = "#d7fce1";
   const red = "#f75c75";
 
   useEffect(() => {
     function shuffle(a) {
-      var j, x, i;
+      let j, x, i;
       for (i = a.length - 1; i > 0; i--) {
         j = Math.floor(Math.random() * (i + 1));
         x = a[i];
@@ -42,7 +42,7 @@ export default function Question(props) {
         styles = { backgroundColor: purple };
       }
     }
-    
+
     return styles;
   }
 
