@@ -29,7 +29,6 @@ export default function App() {
   }, [start]);
 
   function onSelectAnswer(id, e) {
-    console.log("onSelectAnswer run");
     setQuiz((ans) => {
       return ans.map((item) => {
         return item.id === id
