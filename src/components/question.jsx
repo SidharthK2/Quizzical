@@ -11,6 +11,7 @@ export default function Question(props) {
   const red = "#f75c75";
 
   useEffect(() => {
+    console.log("effect shuffle run");
     function shuffle(a) {
       let j, x, i;
       for (i = a.length - 1; i > 0; i--) {

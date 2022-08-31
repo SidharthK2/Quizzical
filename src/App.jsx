@@ -11,11 +11,13 @@ export default function App() {
     "https://opentdb.com/api.php?amount=4&category=14&difficulty=easy&type=multiple&encode=url3986";
 
   function onStart() {
+    console.log("onStart run");
     setStart(!start);
   }
 
   useEffect(() => {
     async function getQuiz() {
+      console.log("calling api");
       const res = await fetch(URL);
       const dataArray = await res.json();
       const dataObj = dataArray.results.map((item) => {
@@ -27,6 +29,7 @@ export default function App() {
   }, [start]);
 
   function onSelectAnswer(id, e) {
+    console.log("onSelectAnswer run");
     setQuiz((ans) => {
       return ans.map((item) => {
         return item.id === id
@@ -47,6 +50,7 @@ export default function App() {
   }
 
   const quizEl = quiz.map((item) => {
+    console.log("quiz elements created");
     return (
       <Question
         key={item.id}
@@ -59,10 +63,9 @@ export default function App() {
       />
     );
   });
-  console.log(quiz, complete);
-
   return (
     <div className="w-screen h-screen">
+      {console.log("Rendered")}
       <img
         src="src/assets/blob 5.png"
         alt="blob1"
