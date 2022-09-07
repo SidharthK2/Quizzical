@@ -7,6 +7,7 @@ export default function App() {
   const [start, setStart] = useState(false);
   const [quiz, setQuiz] = useState([]);
   const [complete, setComplete] = useState(false);
+
   const URL =
     "https://opentdb.com/api.php?amount=4&category=14&difficulty=easy&type=multiple&encode=url3986";
 
@@ -16,16 +17,18 @@ export default function App() {
   }
 
   useEffect(() => {
-    async function getQuiz() {
-      console.log("calling api");
-      const res = await fetch(URL);
-      const dataArray = await res.json();
-      const dataObj = dataArray.results.map((item) => {
-        return { ...item, selectedAns: "", id: nanoid() };
-      });
-      setQuiz(dataObj);
+    if (start) {
+      async function getQuiz() {
+        console.log("calling api");
+        const res = await fetch(URL);
+        const dataArray = await res.json();
+        const dataObj = dataArray.results.map((item) => {
+          return { ...item, selectedAns: "", id: nanoid() };
+        });
+        setQuiz(dataObj);
+      }
+      getQuiz();
     }
-    getQuiz();
   }, [start]);
 
   function onSelectAnswer(id, e) {
@@ -78,14 +81,14 @@ export default function App() {
           {!complete && (
             <button
               onClick={onSubmit}
-              className="p-4 text-xl font-semibold bg-indigo-600 hover:bg-indigo-700 rounded-lg">
+              className="p-4 text-xl text-white font-semibold bg-indigo-600 hover:bg-indigo-700 rounded-lg">
               Submit!
             </button>
           )}
           {complete && (
             <button
               onClick={onNewGame}
-              className="p-4 text-xl font-semibold bg-indigo-600 hover:bg-indigo-700 rounded-lg">
+              className="p-4 text-xl text-white font-semibold bg-indigo-600 hover:bg-indigo-700 rounded-lg">
               New Game
             </button>
           )}

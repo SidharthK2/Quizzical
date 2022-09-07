@@ -24,7 +24,7 @@ export default function Question(props) {
     }
     setQuestions(shuffle(cleanData));
     setIsShuffled(true);
-  }, [isShuffled]);
+  }, []);
 
   function computeStyle(textContent, correctAns, selectedAns, isComplete) {
     correctAns = decodeURIComponent(correctAns);
