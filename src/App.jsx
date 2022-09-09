@@ -68,11 +68,6 @@ export default function App() {
   return (
     <div className="w-screen h-screen">
       {console.log("Rendered")}
-      <img
-        src="src/assets/blob 5.png"
-        alt="blob1"
-        className="mt-auto ml-auto drop-shadow-md"
-      />
 
       {!start && <Intro handleClick={onStart} />}
       {start && (
@@ -94,11 +89,6 @@ export default function App() {
           )}
         </div>
       )}
-      <img
-        src="src/assets/blob 6.png"
-        alt="blob2"
-        className="mb-auto mr-auto drop-shadow-md"
-      />
     </div>
   );
 }
