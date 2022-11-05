@@ -52,7 +52,6 @@ export default function App() {
   }
 
   const quizEl = quiz.map((item) => {
-    console.log("quiz elements created");
     return (
       <Question
         key={item.id}
@@ -67,8 +66,6 @@ export default function App() {
   });
   return (
     <div className="w-screen h-screen">
-      {console.log("Rendered")}
-
       {!start && <Intro handleClick={onStart} />}
       {start && (
         <div className="flex flex-col divide-y-2 gap-6 m-2 px-2 items-center">
