@@ -12,14 +12,12 @@ export default function App() {
     "https://opentdb.com/api.php?amount=4&category=14&difficulty=easy&type=multiple&encode=url3986";
 
   function onStart() {
-    console.log("onStart run");
     setStart(!start);
   }
 
   useEffect(() => {
     if (start) {
       async function getQuiz() {
-        console.log("calling api");
         const res = await fetch(URL);
         const dataArray = await res.json();
         const dataObj = dataArray.results.map((item) => {
@@ -64,6 +62,13 @@ export default function App() {
       />
     );
   });
+  const finalScoreCount = (q) => {
+    let selectedAns = q.selectedAns.split(" ");
+    console.log(selectedAns);
+    let correctAns = q.correct_answer.split("%");
+    console.log(correctAns);
+    return selectedAns[0] == correctAns[0];
+  };
   return (
     <div className="w-screen h-screen">
       {!start && <Intro handleClick={onStart} />}
@@ -85,6 +90,11 @@ export default function App() {
             </button>
           )}
         </div>
+      )}
+      {complete && (
+        <div className="score text-center pb-4">{`Score: ${
+          quiz.filter(finalScoreCount).length
+        }/5`}</div>
       )}
     </div>
   );
