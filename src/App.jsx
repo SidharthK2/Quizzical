@@ -64,9 +64,7 @@ export default function App() {
   });
   const finalScoreCount = (q) => {
     let selectedAns = q.selectedAns.split(" ");
-    console.log(selectedAns);
     let correctAns = q.correct_answer.split("%");
-    console.log(correctAns);
     return selectedAns[0] == correctAns[0];
   };
   return (
